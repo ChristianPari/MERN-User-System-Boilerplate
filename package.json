@@ -1,0 +1,23 @@
+{
+  "name": "user-system",
+  "version": "1.0.0",
+  "description": "Rest API that will allow registration and loging in to a public client",
+  "main": "app.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "nodemon app.js",
+    "pro": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.6",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.2"
+  }
+}
