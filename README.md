@@ -1,4 +1,4 @@
-# User System MERN Stack
+# User System MERN Stack + React Fontend Setup in client folder
 
 ## How to start working with this template
     1) click on the 'Use this template' button on the 'backend-template' branch
