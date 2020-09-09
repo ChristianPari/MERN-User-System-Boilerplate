@@ -9,7 +9,7 @@ const userRouter = require("./api/routes/userRouter");
 //MIDDLEWARES
 
 //ENV CONTANTS
-const PORT = process.env.PORT || 3000, //Port number for server to listen on, defined in enviorment file
+const PORT = process.env.PORT || 2000, //Port number for server to listen on, defined in enviorment file
     URI = process.env.MONGO; // URI that gives read/write access to database, this need to be stored in an env so that the public can not read/write your database without going through your API
 
 //MongoDB Utility Function Used To Connect To DB
