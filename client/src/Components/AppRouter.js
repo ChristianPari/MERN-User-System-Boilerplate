@@ -9,34 +9,34 @@ import Register from './Register'
 
 export default function AppRouter() {
     return (
-        <Switch>
-            <Route
-                exact path='/'
+      <Switch>
+        <Route
+          exact path='/'
+        >
+          <Home />
+        </Route>
+        <Route
+          exact path='/login'
+        >
+          <Login />
+        </Route>
+        <Route
+          exact path='/register'
+        >
+          <Register />
+        </Route>
+        <Route
+          path='/'
+        >
+          <div>
+            <h1>404 Error</h1>
+            <a
+              href={window.location.origin}
             >
-                <Home />
-            </Route>
-            <Route
-                exact path='/login'
-            >
-                <Login />
-            </Route>
-            <Route
-                exact path='/register'
-            >
-                <Register />
-            </Route>
-            <Route
-                path='/'
-            >
-                <div>
-                    <h1>404 Error</h1>
-                    <a
-                        href={window.location.origin}
-                    >
-                        Back to Home
-                    </a>
-                </div>
-            </Route>
-        </Switch>
-    )
+              Back to Home
+           </a>
+          </div>
+        </Route>
+      </Switch>
+  )
 }
