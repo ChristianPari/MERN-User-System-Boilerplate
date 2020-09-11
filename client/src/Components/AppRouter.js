@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom'
 import Home from './Home'
 import Login from './Login'
 import Register from './Register'
+import Button from './Button'
 
 export default function AppRouter() {
     return (
@@ -30,11 +31,10 @@ export default function AppRouter() {
         >
           <div>
             <h1>404 Error</h1>
-            <a
-              href={window.location.origin}
-            >
-              Back to Home
-           </a>
+            <Button
+              text={"Back to Home"}
+              onClick={() => {window.location = window.location.origin}}
+            />
           </div>
         </Route>
       </Switch>

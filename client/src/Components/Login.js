@@ -1,5 +1,8 @@
 import React from "react"
 
+// components
+import Button from "./Button"
+
 export default function Login() {
 
 	const regLink = window.location.origin + "/register";
@@ -9,9 +12,11 @@ export default function Login() {
 			<h1>Login to Your Account</h1>
 			<p>
 				Need an account?
-				<a href={regLink}>
-					Register
-				</a>
+        <Button 
+          style={{color: 'white', backgroundColor: 'black'}}
+          text={"Sign Up"}
+          onClick={() => { window.location = regLink }}
+        />
 			</p>
 		</div>
 	)
