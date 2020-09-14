@@ -5,8 +5,8 @@ import Button from "./Button"
 
 export default function Home() {
 
-	const loginLink = window.location.origin + "/login";
-	const regLink = window.location.origin + "/register";
+	const loginLink = "/login";
+	const regLink = "/register";
 
 	return (
 		<div className="home">
@@ -14,13 +14,15 @@ export default function Home() {
 			<p>
 				Need an account?
         <Button 
+          className="register_button"
           style={{color: 'white', backgroundColor: 'black'}}
           text={"Sign Up"}
           onClick={() => {window.location = regLink}}
         />
 				<br />
 				Already a user?
-				<Button 
+        <Button 
+          className="login_button"
           style= {{color: 'white', backgroundColor: 'black'}}
           text={"Login"}
           onClick={() => {window.location = loginLink}}
