@@ -2,6 +2,11 @@ import React from "react"
 
 // components
 import Button from "./Button"
+import Form from "./Form"
+import { loginReq } from '../utils/user_Requests'
+
+// utils
+import { loginInputs } from "../utils/user_Inputs"
 
 export default function Login() {
 
@@ -9,7 +14,12 @@ export default function Login() {
 
 	return (
 		<div className="login">
-			<h1>Login to Your Account</h1>
+      <Form 
+        title={"Login to Your Account"}
+        submitFunc={loginReq}
+        id={"loginForm"}
+        inputs={loginInputs}
+      />
 			<p>
 				Need an account?
         <Button 

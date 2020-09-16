@@ -2,6 +2,11 @@ import React from "react"
 
 // components
 import Button from "./Button";
+import Form from "./Form"
+import { regReq } from '../utils/user_Requests'
+
+// utils
+import { regInputs } from "../utils/user_Inputs"
 
 export default function Register() {
 
@@ -9,11 +14,19 @@ export default function Register() {
 
   return (
     <div className="register">
-      <h1>Register Today</h1>
+      <Form 
+        title={"Register for an Account"}
+        submitFunc={regReq}
+        id={"registerForm"}
+        inputs={regInputs}
+      />
       <p>
         Already have an account?
 		    <Button 
-          style={{color: 'white', backgroundColor: 'black'}}
+          style={{
+            color: 'white', 
+            backgroundColor: 'black'
+          }}
           text={"Login"}
           onClick={() => {window.location = loginLink}}
         />

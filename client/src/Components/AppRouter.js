@@ -9,35 +9,35 @@ import Register from './Register'
 import Button from './Button'
 
 export default function AppRouter() {
-    return (
-      <Switch>
+  return (
+    <Switch>
 
-        <Route exact path='/' >
-          <Home />
-        </Route>
+      <Route exact path='/' >
+        <Home />
+      </Route>
 
-        <Route exact path='/login' >
-          <Login />
-        </Route>
+      <Route exact path='/login' >
+        <Login />
+      </Route>
 
-        <Route exact path='/register' >
-          <Register />
-        </Route>
+      <Route exact path='/register' >
+        <Register />
+      </Route>
 
-        <Route path='/' >
+      <Route path='/' >
 
-          <div>
-            <h1>404 Error</h1>
+        <div>
+          <h1>404 Error</h1>
 
-            <Button
-              text={"Back to Home"}
-              onClick={() => {window.location = window.location.origin}}
-            />
-            
-          </div>
+          <Button
+            text={"Back to Home"}
+            onClick={() => {window.location = window.location.origin}}
+          />
 
-        </Route>
+        </div>
 
-      </Switch>
+      </Route>
+
+    </Switch>
   )
 }
