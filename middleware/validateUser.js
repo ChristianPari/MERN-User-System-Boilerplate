@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const validator = require("validator");
+const bcrypt = require("bcrypt");
 
 const msgs = {
     emailInUse: "Email Already In Use",
@@ -12,7 +13,20 @@ const msgs = {
 };
 
 const validate = async(req, res, next) => {
-    const { email: e, password: p, username: u } = req.body;
+
+  console.log(req.body);
+
+    const { 
+      email: e, 
+      password: p, 
+      username: u 
+    } = req.body;
+
+    if (e === undefined || p === undefined || u === undefined ) {
+      return res.status(400).json({
+        err: 'One or more missing fields'
+      })
+    }
 
     failedValues = [];
 
@@ -39,15 +53,15 @@ const validate = async(req, res, next) => {
     }
 
     if (
-        username == undefined ||
-        username.trim().length == 0 ||
-        !validator.isLength(username, { min: 3, max: 21 })
+        u == undefined ||
+        u.trim().length == 0 ||
+        !validator.isLength(u, { min: 3, max: 21 })
     ) {
         failedValues.push({
             key: "username",
             message: msgs.legthInvalid("Username"),
         });
-    } else if (!validator.isAlphanumeric(username, "en-US")) {
+    } else if (!validator.isAlphanumeric(u, "en-US")) {
         failedValues.push({
             key: "username",
             message: msgs.userChars,
@@ -62,7 +76,7 @@ const validate = async(req, res, next) => {
         });
     }
 
-    if (!validator.isLength(pass, { min: 7, max: 1000 })) {
+    if (!validator.isLength(p, { min: 7, max: 1000 })) {
         failedValues.push({
             key: "password",
             message: msgs.legthInvalid("Password"),
@@ -74,11 +88,15 @@ const validate = async(req, res, next) => {
             validation_error: failedValues,
         });
     } else {
+
+      const encryptPass = await bcrypt.hash(p, 10);
+
         req.userData = {
             email: e,
             username: u,
-            password: p,
+            password: encryptPass
         };
+
         next();
     }
 };

@@ -7,42 +7,46 @@ const failedLogin = (req, res) => {
 };
 
 module.exports = async(req, res, next) => {
-    const { credential: c, password: p } = req.body;
+  try {
+    const { credential, password} = req.body;
 
-    c = c.trim().toLowerCase();
-    p = p.trim();
-
-    try {
-        const query = {},
-            field = validator.isEmail(c) ? "email" : "username";
-
-        query[field] = c;
-
-        const projection = { password: 1 },
-            user = await User.findOne(query, projection);
-
-        if (user === null) {
-            console.error(`\nLogin Failed: '${field}' Not In Use`);
-            return failedLogin(req, res);
-        }
-
-        const pass = req.body.password,
-            passTest =
-            pass === undefined || pass.trim() === "" ?
-            false :
-            await bcrypt.compare(pass, user.password);
-
-        if (!passTest) {
-            console.error("\nLogin Failed: Password Invalid");
-            return failedLogin(req, res);
-        }
-
-        req.id = user._id;
-
-        next(); //if code execution reaches here, it is assumed the user has successfully logged in
-    } catch (err) {
-        res.status(500).json({
-            message: err.message || err,
-        });
+    if ( credential === undefined || password === undefined) {
+      return res.status(400).json({
+        err: "Username or Password Incorrect"
+      })
     }
+    const 
+      c = credential.trim().toLowerCase();
+      query = {},
+      field = validator.isEmail(c) ? "email" : "username";
+
+    query[field] = c;
+
+    const projection = { password: 1 },
+      user = await User.findOne(query, projection);
+
+    if (user === null) {
+      console.error(`\nLogin Failed: '${field}' Not In Use`);
+      return failedLogin(req, res);
+    }
+
+    const pass = req.body.password,
+      passTest =
+      pass === undefined || pass.trim() === "" ?
+      false :
+      await bcrypt.compare(pass, user.password);
+
+    if (!passTest) {
+      console.error("\nLogin Failed: Password Invalid");
+      return failedLogin(req, res);
+    }
+
+    req.id = user._id;
+
+    next(); //if code execution reaches here, it is assumed the user has successfully logged in
+  } catch (err) {
+    res.status(500).json({
+      message: err.message || err,
+    });
+  }
 };
