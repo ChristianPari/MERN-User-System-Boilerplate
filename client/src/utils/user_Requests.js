@@ -62,7 +62,7 @@ module.exports = {
     })
     .catch(err => {
       if (err) {
-        console.log(err);
+        console.log("Login Failed");
       }
     })
 
