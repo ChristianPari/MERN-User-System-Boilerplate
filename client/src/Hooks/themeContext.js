@@ -19,6 +19,8 @@ export function ThemeProvider({ children }) {
   const [theme, setTheme] = useLocalStorage('darkTheme', false)
   const [darkTheme, setDarkTheme] = useState(theme)
 
+  document.getElementById('root').style.backgroundColor = darkTheme? 'black' : 'white'
+
   function toggleTheme() {
     setTheme(theme => !theme)
     setDarkTheme(prevDarkTheme => !prevDarkTheme)
