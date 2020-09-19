@@ -2,32 +2,44 @@ import React from "react"
 
 // components
 import Button from "./Button"
+import PageOptions from './PageOptions'
 
-export default function Home() {
+export default function Home(props) {
 
 	const loginLink = "/login";
-	const regLink = "/register";
+  const regLink = "/register";
+  
+  const 
+  textStyle = props.theme === 'light' ?
+    {color: 'black'} :
+    {color: 'white'};
 
 	return (
 		<div className="home">
-			<h1>Welcome to our Service</h1>
-			<p>
-				Need an account?
+			<h1
+        style={textStyle}
+      >Welcome to our Service</h1>
+			<p
+        style={textStyle}
+      >
+				<big>Need an account? </big>
         <Button 
           className="register_button"
-          style={{color: 'white', backgroundColor: 'black'}}
           text={"Sign Up"}
           onClick={() => {window.location = regLink}}
         />
 				<br />
-				Already a user?
+				<big>Already a user? </big>
         <Button 
           className="login_button"
-          style= {{color: 'white', backgroundColor: 'black'}}
           text={"Login"}
           onClick={() => {window.location = loginLink}}
         />
 			</p>
+      <PageOptions 
+        setTheme={props.themer}
+        curTheme={props.theme}
+      />
 		</div>
 	)
 

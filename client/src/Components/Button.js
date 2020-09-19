@@ -3,7 +3,18 @@ import React from 'react'
 export default function Button(props) {
   return(
     <button 
-      style={{...defaultStyle, ...props.style}}
+      style={
+        props.theme === 'light' ? 
+          {
+            ...defaultStyle, 
+            ...lightTheme, 
+            ...props.style
+          } : 
+          {
+            ...defaultStyle, 
+            ...darkTheme, 
+            ...props.style
+          }}
       onClick={props.onClick}  
     >
       {props.text}
@@ -16,7 +27,15 @@ const defaultStyle = {
   borderRadius: 7,
   fontSize: 'small',
   fontWeight: '900',
-  backgroundColor: 'blue',
-  color: 'red',
-  curser: 'pointer'
+  cursor: 'pointer'
+}
+
+const lightTheme = {
+  borderColor: 'black'
+}
+
+const darkTheme = {
+  color: 'white',
+  backgroundColor: 'black',
+  borderColor: 'white'
 }

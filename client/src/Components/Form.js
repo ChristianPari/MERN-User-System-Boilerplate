@@ -15,7 +15,11 @@ export default function Form(props) {
   
   return (
     <div>
-      <h2>
+      <h2
+        style={props.theme === 'light' ?
+          {color: 'black'} :
+          {color: 'white'}}
+      >
         {props.title}
       </h2>
       <form
@@ -25,6 +29,7 @@ export default function Form(props) {
           Array.isArray(props.inputs) ?
           props.inputs.map(inProps => 
             <Input 
+              theme={props.theme}
               key={props.inputs.indexOf(inProps)}
               ph={inProps.ph}
               name={inProps.name}
@@ -36,10 +41,10 @@ export default function Form(props) {
           ) : "Dev Warning! No inputs, Check code"
         }
       </form>
-      <Button 
+      <Button
+        theme={props.theme}
         text={"Submit"}
         onClick={btn_onClick}
-        style={{color: "white"}}
       />
     </div>
   )

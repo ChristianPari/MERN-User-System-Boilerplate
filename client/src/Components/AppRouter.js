@@ -8,20 +8,29 @@ import Login from './Login'
 import Register from './Register'
 import Button from './Button'
 
-export default function AppRouter() {
+export default function AppRouter(props) {
   return (
     <Switch>
 
       <Route exact path='/' >
-        <Home />
+        <Home 
+          theme={props.theme}
+          themer={props.themer}
+        />
       </Route>
 
       <Route exact path='/login' >
-        <Login />
+        <Login 
+          theme={props.theme}
+          themer={props.themer}
+        />
       </Route>
 
       <Route exact path='/register' >
-        <Register />
+        <Register 
+          theme={props.theme}
+          themer={props.themer}
+        />
       </Route>
 
       <Route path='/' >
@@ -32,6 +41,11 @@ export default function AppRouter() {
           <Button
             text={"Back to Home"}
             onClick={() => {window.location = window.location.origin}}
+            style={props.theme === "light" ? "" : {
+              color: "white",
+              backgroundColor: "black",
+              borderColor: 'white'
+            }}
           />
 
         </div>

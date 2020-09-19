@@ -7,15 +7,34 @@ export default function Input(props) {
       placeholder={props.ph}
       name={props.name}
       type={props.type}
-      style={{...defaultStyle, ...props.style}}  
+      style={
+        props.theme === 'light' ? 
+          {
+            ...defaultStyle,
+            ...lightTheme, 
+            ...props.style
+          } :
+          {
+            ...defaultStyle,
+            ...darkTheme,
+            ...props.style
+          }}  
     />
   )
 }
 
-const defaultStyle = {
-  color: 'white',
+const defaultStyle ={
   border: 'none',
   padding: 10,
   borderRadius: 7,
+}
+
+const lightTheme = {
+  color: 'white',
   backgroundColor: 'black'
+}
+
+const darkTheme = {
+  color: 'black',
+  backgroundColor: 'white'
 }
