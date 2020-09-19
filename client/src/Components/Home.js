@@ -2,31 +2,32 @@ import React from "react"
 
 // components
 import Button from "./Button"
-import PageOptions from './PageOptions'
+import { useTheme, useThemeUpdate } from '../Hooks/themeContext'
+
+// utils
+import darkModeTheming from '../utils/darkModeTheming'
 
 export default function Home(props) {
 
-	const loginLink = "/login";
-  const regLink = "/register";
-  
-  const 
-  textStyle = props.theme === 'light' ?
-    {color: 'black'} :
-    {color: 'white'};
+	const loginLink = "/login"
+  const regLink = "/register"
+  const darkTheme = useTheme()
+  const toggleTheme = useThemeUpdate()
+  const themeStyles = darkModeTheming(darkTheme)
 
 	return (
-		<div className="home">
-			<h1
-        style={textStyle}
-      >Welcome to our Service</h1>
-			<p
-        style={textStyle}
-      >
+    <div 
+      className="home"
+      style={themeStyles.text}
+    >
+			<h1>Welcome to our Service</h1>
+			<p>
 				<big>Need an account? </big>
         <Button 
           className="register_button"
           text={"Sign Up"}
           onClick={() => {window.location = regLink}}
+          style={themeStyles.btn}
         />
 				<br />
 				<big>Already a user? </big>
@@ -34,11 +35,13 @@ export default function Home(props) {
           className="login_button"
           text={"Login"}
           onClick={() => {window.location = loginLink}}
+          style={themeStyles.btn}
         />
 			</p>
-      <PageOptions 
-        setTheme={props.themer}
-        curTheme={props.theme}
+      <Button
+        onClick={toggleTheme}
+        text={'Toggle Dark Mode'}
+        style={themeStyles.btn}
       />
 		</div>
 	)

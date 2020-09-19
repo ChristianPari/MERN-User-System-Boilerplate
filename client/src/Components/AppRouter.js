@@ -7,47 +7,43 @@ import Home from './Home'
 import Login from './Login'
 import Register from './Register'
 import Button from './Button'
+import { useTheme, useThemeUpdate } from '../Hooks/themeContext'
 
-export default function AppRouter(props) {
+// utils
+import darkModeTheming from '../utils/darkModeTheming'
+
+export default function AppRouter() {
+  
+  const darkTheme = useTheme()
+  const themeStyles = darkModeTheming(darkTheme)
+
   return (
     <Switch>
 
       <Route exact path='/' >
-        <Home 
-          theme={props.theme}
-          themer={props.themer}
-        />
+        <Home />
       </Route>
 
       <Route exact path='/login' >
-        <Login 
-          theme={props.theme}
-          themer={props.themer}
-        />
+        <Login />
       </Route>
 
       <Route exact path='/register' >
-        <Register 
-          theme={props.theme}
-          themer={props.themer}
-        />
+        <Register />
       </Route>
 
       <Route path='/' >
 
-        <div>
+        <div
+          style={themeStyles.text}
+        >
           <h1>404 Error</h1>
 
           <Button
             text={"Back to Home"}
             onClick={() => {window.location = window.location.origin}}
-            style={props.theme === "light" ? "" : {
-              color: "white",
-              backgroundColor: "black",
-              borderColor: 'white'
-            }}
+            style={themeStyles.btn}
           />
-
         </div>
 
       </Route>

@@ -5,9 +5,6 @@ import Input from './Input'
 import Button from './Button'
 
 export default function Form(props) {
-  // title
-  // inputs
-  // subitFunction
 
   const btn_onClick = () => {
     props.submitFunc(document.getElementById(props.id))
@@ -15,11 +12,7 @@ export default function Form(props) {
   
   return (
     <div>
-      <h2
-        style={props.theme === 'light' ?
-          {color: 'black'} :
-          {color: 'white'}}
-      >
+      <h2>
         {props.title}
       </h2>
       <form
@@ -29,12 +22,11 @@ export default function Form(props) {
           Array.isArray(props.inputs) ?
           props.inputs.map(inProps => 
             <Input 
-              theme={props.theme}
               key={props.inputs.indexOf(inProps)}
               ph={inProps.ph}
               name={inProps.name}
               type={inProps.type}
-              style={inProps.style}
+              style={props.inputStyle}
               id={inProps.id}
               onChange={inProps.onChange}
             />
@@ -42,9 +34,9 @@ export default function Form(props) {
         }
       </form>
       <Button
-        theme={props.theme}
         text={"Submit"}
         onClick={btn_onClick}
+        style={props.btnStyle}
       />
     </div>
   )
