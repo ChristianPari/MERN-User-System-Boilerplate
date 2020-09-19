@@ -4,15 +4,17 @@
   "description": "Rest API that will allow registration and loging in to a public client",
   "main": "server.js",
   "scripts": {
-    "start": "npm run dev",
+    "start": "npm run fullstack",
     "dev": "nodemon server.js",
-    "pro": "node server.js"
+    "pro": "node server.js",
+    "fullstack": "concurrently \"npm run dev\" \"cd ../client && npm start\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
