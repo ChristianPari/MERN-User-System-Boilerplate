@@ -2,20 +2,30 @@ import React from "react"
 
 // components
 import Button from "./Button";
+import DarkModeBtn from './DarkModeBtn'
 import Form from "./Form"
 import { regReq } from '../utils/user_Requests'
-import { useTheme, useThemeUpdate } from '../Hooks/themeContext'
+import ResetVisits from './ResetVisits'
 
 // utils
 import { regInputs } from "../utils/user_Inputs"
 import darkModeTheming from '../utils/darkModeTheming'
 
+// hooks
+import { useTheme } from '../Hooks/themeContext'
+import useLocalStorage from '../Hooks/useLocalStorage'
+
 export default function Register(props) {
 
   const loginLink = "/login"
   const darkTheme = useTheme()
-  const toggleTheme = useThemeUpdate()
   const themeStyles = darkModeTheming(darkTheme)
+  const [visits, setVisits] = useLocalStorage('visits', {})
+
+  window.onload = () => {
+    visits.register? visits.register += 1 : visits['register'] = 1
+    setVisits({...visits, 'register': visits.register})
+  }
 
   return (
     <div 
@@ -31,7 +41,7 @@ export default function Register(props) {
         btnStyle={themeStyles.btn}
       />
       <p>
-        <big>Already have an account?</big>
+        <big>Already have an account? </big>
 		    <Button
           theme={props.theme}
           text={"Login"}
@@ -39,11 +49,13 @@ export default function Register(props) {
           onClick={() => {window.location = loginLink}}
         />
       </p>
-      <Button
-        onClick={toggleTheme}
-        style={themeStyles.btn}
-        text={'Toggle Dark Mode'}
+      <ResetVisits 
+        btnTheme={themeStyles.btn}
+        btnOnClick={setVisits}
+        pageVisits={visits}
+        pageName={'register'}
       />
+      <DarkModeBtn />
     </div>
   )
 }

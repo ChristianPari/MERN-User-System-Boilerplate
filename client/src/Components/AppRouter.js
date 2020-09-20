@@ -7,7 +7,7 @@ import Home from './Home'
 import Login from './Login'
 import Register from './Register'
 import Button from './Button'
-import { useTheme, useThemeUpdate } from '../Hooks/themeContext'
+import { useTheme } from '../Hooks/themeContext'
 
 // utils
 import darkModeTheming from '../utils/darkModeTheming'
