@@ -7,8 +7,8 @@ module.exports = (darkTheme) => {
       color: darkTheme? 'white' : 'black'
     },
     btn: {
-      color: darkTheme? 'white' : 'black',
-      backgroundColor: darkTheme? 'black' : 'white'
+      color: darkTheme? 'black' : 'white',
+      backgroundColor: darkTheme? 'white' : 'black'
     },
     input: {
       color: darkTheme? 'black' : 'white',

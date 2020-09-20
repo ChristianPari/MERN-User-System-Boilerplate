@@ -2,18 +2,28 @@ import React from "react"
 
 // components
 import Button from "./Button"
-import { useTheme, useThemeUpdate } from '../Hooks/themeContext'
+import DarkModeBtn from './DarkModeBtn'
+import ResetVisits from './ResetVisits'
 
 // utils
 import darkModeTheming from '../utils/darkModeTheming'
+
+// hooks
+import { useTheme } from '../Hooks/themeContext'
+import useLocalStorage from '../Hooks/useLocalStorage'
 
 export default function Home(props) {
 
 	const loginLink = "/login"
   const regLink = "/register"
   const darkTheme = useTheme()
-  const toggleTheme = useThemeUpdate()
   const themeStyles = darkModeTheming(darkTheme)
+  const [visits, setVisits] = useLocalStorage('visits', {})
+
+  window.onload = () => {
+    visits.home? visits.home += 1 : visits['home'] = 1
+    setVisits({...visits, 'home': visits.home})
+  }
 
 	return (
     <div 
@@ -38,11 +48,13 @@ export default function Home(props) {
           style={themeStyles.btn}
         />
 			</p>
-      <Button
-        onClick={toggleTheme}
-        text={'Toggle Dark Mode'}
-        style={themeStyles.btn}
+      <ResetVisits 
+        btnTheme={themeStyles.btn}
+        btnOnClick={setVisits}
+        pageVisits={visits}
+        pageName={'home'}
       />
+      <DarkModeBtn />
 		</div>
 	)
 
