@@ -22,7 +22,7 @@ module.exports = async(req, res, next) => {
 
     query[field] = c;
 
-    const projection = { password: 1 },
+    const projection = { password: 1, username: 1 },
       user = await User.findOne(query, projection);
 
     if (user === null) {
@@ -42,6 +42,7 @@ module.exports = async(req, res, next) => {
     }
 
     req.id = user._id;
+    req.user = user.username;
 
     next(); //if code execution reaches here, it is assumed the user has successfully logged in
   } catch (err) {

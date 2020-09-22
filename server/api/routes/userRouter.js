@@ -34,8 +34,8 @@ router.put(
   createJWT, 
   (req, res) => {
     try {
-      console.log(req.token);
-        res.json(req.token);
+      console.log({'token': req.token, 'user': req.user});
+        res.json({'token': req.token, 'user': req.user});
     } catch (err) {
         res.status(500).json({
             message: err.message,
