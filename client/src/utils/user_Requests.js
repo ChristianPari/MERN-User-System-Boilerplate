@@ -59,6 +59,8 @@ module.exports = {
     await axios.put(loginURL, reqBody)
     .then(res => {
       console.log(res);
+      sessionStorage.setItem('user', res.data.user)
+      window.location = '/'
     })
     .catch(err => {
       if (err) {
@@ -159,6 +161,8 @@ module.exports = {
     await axios.post(registerURL, reqBody)
     .then(res => {
       console.log(res);
+      sessionStorage.setItem('user', res.data.username)
+      window.location = '/'
     })
     .catch(err => {
       if (err) {
