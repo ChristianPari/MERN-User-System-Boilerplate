@@ -13,19 +13,14 @@ import darkModeTheming from '../utils/darkModeTheming'
 
 // hooks
 import { useTheme } from '../Hooks/themeContext'
-import useLocalStorage from '../Hooks/useLocalStorage'
+import usePageVisits from '../Hooks/usePageVisits'
 
 export default function Login(props) {
 
   const regLink = "/register";
   const darkTheme = useTheme()
   const themeStyles = darkModeTheming(darkTheme)
-  const [visits, setVisits] = useLocalStorage('visits', 0)
-
-  window.onload = () => {
-    visits.login? visits.login += 1 : visits['login'] = 1
-    setVisits({...visits, 'login': visits.login})
-  }
+  usePageVisits('login')
 
 	return (
     <div 
@@ -50,8 +45,6 @@ export default function Login(props) {
 			</p>
       <ResetVisits 
         btnTheme={themeStyles.btn}
-        btnOnClick={setVisits}
-        pageVisits={visits}
         pageName={'login'}
       />
       <DarkModeBtn />
