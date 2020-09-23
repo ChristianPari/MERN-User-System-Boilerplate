@@ -1,0 +1,2 @@
+# Class React
+This is an in-class assigned project that is being used to teach how to use React! This is partially done in group coding but mostly of on own time coding along with indivudual research and implementation of new concepts.
