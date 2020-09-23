@@ -20,19 +20,19 @@ export default function AppRouter() {
   return (
     <Switch>
 
-      <Route exact path='/' >
+      <Route exact path='/'>
         <Home />
       </Route>
 
-      <Route exact path='/login' >
+      <Route exact path='/login'>
         <Login />
       </Route>
 
-      <Route exact path='/register' >
+      <Route exact path='/register'>
         <Register />
       </Route>
 
-      <Route path='/' >
+      <Route path='/'>
 
         <div
           style={themeStyles.text}

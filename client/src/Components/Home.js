@@ -10,7 +10,7 @@ import darkModeTheming from '../utils/darkModeTheming'
 
 // hooks
 import { useTheme } from '../Hooks/themeContext'
-import useLocalStorage from '../Hooks/useLocalStorage'
+import usePageVisits from '../Hooks/usePageVisits'
 
 export default function Home(props) {
 
@@ -19,12 +19,7 @@ export default function Home(props) {
   const loggedInUser = sessionStorage.getItem('user')
   const darkTheme = useTheme()
   const themeStyles = darkModeTheming(darkTheme)
-  const [visits, setVisits] = useLocalStorage('visits', {})
-
-  window.onload = () => {
-    visits.home? visits.home += 1 : visits['home'] = 1
-    setVisits({...visits, 'home': visits.home})
-  }
+  usePageVisits('home')
 
   if (loggedInUser) {
     document.title = loggedInUser
@@ -71,8 +66,6 @@ export default function Home(props) {
       }
       <ResetVisits 
         btnTheme={themeStyles.btn}
-        btnOnClick={setVisits}
-        pageVisits={visits}
         pageName={'home'}
       />
       <DarkModeBtn />
