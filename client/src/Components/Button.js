@@ -13,6 +13,7 @@ export default function Button(props) {
 
 const defaultStyle = {
   padding: 7,
+  margin: 1,
   borderRadius: 7,
   fontSize: 'small',
   fontWeight: '900',

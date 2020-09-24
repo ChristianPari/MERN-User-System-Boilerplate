@@ -8,10 +8,10 @@ import { ThemeProvider } from '../Hooks/themeContext'
 
 export default function App() {
 	return (
-    <ThemeProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <ThemeProvider>
           <AppRouter />
-      </BrowserRouter>
-    </ThemeProvider>
+      </ThemeProvider>
+    </BrowserRouter>
 	);
 }
