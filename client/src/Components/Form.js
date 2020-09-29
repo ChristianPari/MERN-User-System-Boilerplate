@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // components
 import Input from './Input'
@@ -6,8 +6,16 @@ import Button from './Button'
 
 export default function Form(props) {
 
+  const initialState = props.inputs.reduce(
+    (initial, input) => {
+      initial[input.name] = ''
+      return initial
+    }, {})
+
+  const [formValues, setFormValues] = useState(initialState)
+
   const btn_onClick = () => {
-    props.submitFunc(document.getElementById(props.id))
+    props.submitFunc(formValues)
   }
   
   return (
@@ -28,7 +36,12 @@ export default function Form(props) {
               type={inProps.type}
               style={props.inputStyle}
               id={inProps.id}
-              onChange={inProps.onChange}
+              onChange={(e) => {
+                setFormValues({
+                  ...formValues, 
+                  [e.target.name]: e.target.value
+                })
+              }}
             />
           ) : "Dev Warning! No inputs, Check code"
         }

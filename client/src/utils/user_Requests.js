@@ -4,25 +4,25 @@ const baseURL = 'http://localhost:2000'
 const validator = require("validator")
 
 module.exports = {
-  loginReq: async (form) => {
+  loginReq: async (values) => {
 
     const
     reqBody = {},
     fieldErrors = {};
 
-    for (const input of form) {
+    for (const key in values) {
       
-      const val = input.value;
+      const val = values[key];
 
-      if (input.name === "credential" && (val.length < 3 || val.length > 254)) {
+      if (key === "credential" && (val.length < 3 || val.length > 254)) {
 
-        fieldErrors[input.name] = "\nInvalid length, must be between 3 and 254 characters"
+        fieldErrors[key] = "\nInvalid length, must be between 3 and 254 characters"
 
       }
 
-      if (input.name === "password" && (val.length < 7 || val.length > 1000)) {
+      if (key === "password" && (val.length < 7 || val.length > 1000)) {
 
-        fieldErrors[input.name] = "\nInvalid lengt, must be between 7 and 1000 characters"
+        fieldErrors[key] = "\nInvalid lengt, must be between 7 and 1000 characters"
 
       }
 
@@ -46,9 +46,9 @@ module.exports = {
 
     } else {
 
-      for (const input of form) {
+      for (const key in values) {
         
-        reqBody[input.name] = input.value
+        reqBody[key] = values[key]
 
       }
 
@@ -69,17 +69,17 @@ module.exports = {
     })
 
   },
-  regReq: async (form) => {
+  regReq: async (values) => {
     
     const
     reqBody = {},
     fieldErrors = {};
 
-    for (const input of form) {
+    for (const key in values) {
       
-      const val = input.value;
+      const val = values[key];
 
-      if (input.name === "email") {
+      if (key === "email") {
 
         if (val.length < 6 || val.length > 254) {
 
@@ -92,7 +92,7 @@ module.exports = {
         }
       }
       
-      if (input.name === "username") {
+      if (key === "username") {
 
         if (val.length < 3 || val.length > 21) {
 
@@ -101,27 +101,27 @@ module.exports = {
         } 
       }
 
-      if (input.name === "password") {
+      if (key === "password") {
 
         if (val.length < 7 || val.length > 1000) {
 
-          fieldErrors[input.name] = "\nInvalid length: must be between 7 and 1000 characters"
+          fieldErrors[key] = "\nInvalid length: must be between 7 and 1000 characters"
 
         }
       }
       
-      if (input.name === "confirm_pass") {
+      if (key === "confirm_pass") {
 
         if (val.length < 7 || val.length > 1000) {
 
-          fieldErrors[input.name] = "\nInvalid length: must be between 7 and 1000 characters"
+          fieldErrors[key] = "\nInvalid length: must be between 7 and 1000 characters"
 
         }
       }
 
     }
 
-    if (form[3].value !== form[2].value) {
+    if (values['confirm_pass'].value !== values['password'].value) {
 
       fieldErrors["password_match"] = "\nPasswords don't match"
 
@@ -145,10 +145,10 @@ module.exports = {
 
     } else {
 
-      for (const input of form) {
+      for (const key in values) {
         
-        if (input.name !== "confirm_pass")
-          reqBody[input.name] = input.value
+        if (key !== "confirm_pass")
+          reqBody[key] = values[key]
 
       }
 
